@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// List of registered users
+// Dictionary of registered users
 let users = {};
 
 app.use(cors());
@@ -14,25 +14,41 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Register method
 app.post('/registro', (req, res) => {
     const user = req.body;
     console.log(user);
+    // Saves new user to the dictionary
     users[user.user]=user.password
-    //users.push(user);
 
     res.send('User is added to the database');
 });
 
+// Get method that lists users and their passwords (only for testing)
 app.get('/users', (req, res) => {
     res.json(users);
 });
 
+// Method for user login.
 app.post('/login', (req, res) => {
     const userToLog = req.body;
-    console.log(user);
-    users.push(user);
+    console.log(userToLog);
 
-    res.send('User is added to the database');
+    // Response depending if credentials are correct.
+    if(users[userToLog.user]==null)
+    {
+        res.send('User does not exist in the database');
+    }
+    else if(users[userToLog.user]!=userToLog.password)
+    {
+        res.send('Incorrect password');
+    }
+    else
+    {
+        res.send('Login successful');
+    }
 });
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+
+
+app.listen(port, () => console.log(`BE Tyba app listening on port ${port}!`));
