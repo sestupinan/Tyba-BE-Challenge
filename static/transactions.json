@@ -1,0 +1,17 @@
+[
+    {
+        "id":1,
+        "user":"test",
+        "value":1000
+    },
+    {
+        "id":2,
+        "user":"test",
+        "value":5420
+    },
+    {
+        "id":3,
+        "user":"test",
+        "value":4500
+    }
+]

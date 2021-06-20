@@ -1,12 +1,17 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { json } = require('body-parser');
 
 const app = express();
 const port = 3000;
 
 // Dictionary of registered users
 let users = {};
+
+// List of transactions
+let transactions = require('./static/transactions.json');
+
 
 app.use(cors());
 
@@ -49,6 +54,10 @@ app.post('/login', (req, res) => {
     }
 });
 
+// Method for getting transactions
+app.get('/transactions', (req, res) => {
+    res.json(transactions);
+});
 
-
+// Deploys app to the previously set port.
 app.listen(port, () => console.log(`BE Tyba app listening on port ${port}!`));
